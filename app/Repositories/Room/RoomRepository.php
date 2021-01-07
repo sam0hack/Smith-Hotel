@@ -116,10 +116,9 @@
             $start_date = Carbon::parse($array['start_date'])->format('Y-m-d');
             $end_date = Carbon::parse($array['end_date'])->format('Y-m-d');
             $room = Room::where('room_number', $array['room_number'])->first();
-            $booking = Booking::where('room_id', $room->id)->whereBetween('start_date', [$start_date, $end_date])->OrwhereBetween('end_date', [$start_date, $end_date])->first();
+            $booking = $this->checkAvailability('', $start_date, $end_date, $room->id);
 
-
-            if (!empty($booking)) {
+            if ($booking->isEmpty()) {
                 return false;
             }
 

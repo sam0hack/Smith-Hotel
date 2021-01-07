@@ -104,7 +104,6 @@
         public function makeBooking(Request $request)
         {
 
-
             $this->validate($request,
                 [
                     'room_number' => 'required',
@@ -117,7 +116,9 @@
                 return response()->json(['status' => 'error', 'data' => 'End date should be greater than Start date']);
             }
             $user_id = 0; //@NOTE Sure about using auth because there wasn't anything about that in the requirement doc.
-
+            if ($request->user()) {
+                $user_id = $request->user()->id;
+            }
 
             $booking = $this->roomRepository->bookRoom(['user_id' => $user_id, 'room_number' => $request->input('room_number')
                 , 'start_date' => $request->input('start_date'), 'end_date' => $request->input('end_date')
