@@ -1,0 +1,211 @@
+{
+    "info": {
+        "_postman_id": "896b840f-678b-40b0-bd34-fa9a1cc48015",
+        "name": "Smith Hotel",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "http://127.0.0.1:8181/get-categories",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://127.0.0.1:8181/get-categories",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8181",
+                    "path": [
+                        "get-categories"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8181/check-availability",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "start_date",
+                            "value": "2021-01-12",
+                            "type": "text"
+                        },
+                        {
+                            "key": "end_date",
+                            "value": "2021-01-18",
+                            "type": "text"
+                        },
+                        {
+                            "key": "room_number",
+                            "value": "19",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:8181/check-availability",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8181",
+                    "path": [
+                        "check-availability"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8181/get-available-rooms",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://127.0.0.1:8181/get-available-rooms",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8181",
+                    "path": [
+                        "get-available-rooms"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8181/make-booking",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODE4MVwvbG9naW4iLCJpYXQiOjE2MDk5OTE0NTMsImV4cCI6MTYwOTk5NTA1MywibmJmIjoxNjA5OTkxNDUzLCJqdGkiOiJPUWQ0ZDNpVEllYkVMU0NRIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.KsPSUQ5M1XdvmxkTQrPa3PZTIdcQSYgdT7cBbeSAlHs",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "room_number",
+                            "value": "26",
+                            "type": "text"
+                        },
+                        {
+                            "key": "start_date",
+                            "value": "2021-01-20",
+                            "type": "text"
+                        },
+                        {
+                            "key": "end_date",
+                            "value": "2021-01-22",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:8181/make-booking",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8181",
+                    "path": [
+                        "make-booking"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8181/login",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "http://127.0.0.1:8181/login",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8181",
+                    "path": [
+                        "login"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8181/signup",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "email",
+                            "value": "john@jj.com",
+                            "type": "text"
+                        },
+                        {
+                            "key": "name",
+                            "value": "sami",
+                            "type": "text"
+                        },
+                        {
+                            "key": "password",
+                            "value": "pass123",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:8181/signup",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8181",
+                    "path": [
+                        "signup"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
