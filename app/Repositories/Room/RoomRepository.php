@@ -45,6 +45,7 @@
         public function checkAvailability($category_id, $start_date, $end_date = '', $room_id = '')
         {
 
+
             $rooms = Room::whereNotIn('id', $this->getBookingIds(
                 Carbon::parse($start_date)->format('Y-m-d'),
                 Carbon::parse($end_date)->format('Y-m-d')
@@ -55,6 +56,7 @@
             } elseif (!empty($category_id) and empty($room_id)) {
                 $paginator = $rooms->where('category_id', $category_id)->paginate($this->paginate);
             } elseif (empty($category_id) and !empty($room_id)) {
+
                 $paginator = $rooms->where('id', $room_id)->paginate($this->paginate);
             } else {
                 $paginator = $rooms->paginate($this->paginate);
@@ -76,15 +78,16 @@
         protected function getBookingIds($start_date = '', $end_date = '')
         {
 
-            if (!empty($start_date) and empty($end_date)) {
-                $date = Carbon::parse($start_date)->format('Y-m-d');
-                $bookings = Booking::whereDate('end_date', '>', $date)->get();
-            } elseif (!empty($start_date) and !empty($end_date)) {
-                $start_date = Carbon::parse($start_date)->format('Y-m-d');
-                $end_date = Carbon::parse($end_date)->format('Y-m-d');
-                $bookings = Booking::whereDate('start_date', '>=', $start_date)->where('end_date', '<=', $end_date)->get();
+            if (empty($start_date)) {
+                $start_date = Carbon::now()->format('Y-m-d');
+            }
+
+            if (!empty($end_date)) {
+
+                $bookings = Booking::whereDate('start_date', '=', $start_date)->Orwhere('end_date', '=', $start_date)->Orwhere('start_date', '=', $end_date)->Orwhere('end_date', '=', $end_date)->get();
+
             } else {
-                $bookings = Booking::whereDate('end_date', '>', Carbon::now()->format('Y-m-d'))->get();
+                $bookings = Booking::whereDate('start_date', '=', $start_date)->Orwhere('end_date', '=', $start_date)->get();
             }
 
 
@@ -98,12 +101,18 @@
             return [''];
         }
 
+        /**
+         * @param $array
+         * @return bool
+         * @throws InvalidFormatException
+         */
         public function bookRoom($array)
         {
             $start_date = Carbon::parse($array['start_date'])->format('Y-m-d');
-            //$end_date = Carbon::parse($array['end_date'])->format('Y-m-d');
+            $end_date = Carbon::parse($array['end_date'])->format('Y-m-d');
             $room = Room::where('room_number', $array['room_number'])->first();
-            $booking = Booking::where('room_id', $room->id)->whereDate('start_date', '=', $start_date)->OrwhereDate('end_date', '=', $start_date)->first();
+            $booking = Booking::where('room_id', $room->id)->whereDate('start_date', '=', $start_date)->Orwhere('end_date', '=', $start_date)->Orwhere('start_date', '=', $end_date)->Orwhere('end_date', '=', $end_date)->first();
+
 
             if (!empty($booking)) {
                 return false;
