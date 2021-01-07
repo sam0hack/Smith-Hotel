@@ -62,10 +62,13 @@
                 $paginator = $rooms->paginate($this->paginate);
             }
 
-            return $paginator->getCollection()->transform(function ($value) {
+
+            $paginator = $paginator->setCollection($paginator->getCollection()->transform(function ($value) {
                 $value->category_id = Category::find($value->category_id)->title;
                 return $value;
-            });
+            }));
+
+            return $paginator;
 
         }
 
@@ -84,10 +87,12 @@
 
             if (!empty($end_date)) {
 
-                $bookings = Booking::whereDate('start_date', '=', $start_date)->Orwhere('end_date', '=', $start_date)->Orwhere('start_date', '=', $end_date)->Orwhere('end_date', '=', $end_date)->get();
+
+                $bookings = Booking::whereBetween('start_date', [$start_date, $end_date])->OrwhereBetween('end_date', [$start_date, $end_date])->get();
 
             } else {
-                $bookings = Booking::whereDate('start_date', '=', $start_date)->Orwhere('end_date', '=', $start_date)->get();
+
+                $bookings = Booking::whereDate('start_date', '=', $start_date)->OrwhereDate('end_date', '=', $start_date)->get();
             }
 
 
@@ -111,7 +116,7 @@
             $start_date = Carbon::parse($array['start_date'])->format('Y-m-d');
             $end_date = Carbon::parse($array['end_date'])->format('Y-m-d');
             $room = Room::where('room_number', $array['room_number'])->first();
-            $booking = Booking::where('room_id', $room->id)->whereDate('start_date', '=', $start_date)->Orwhere('end_date', '=', $start_date)->Orwhere('start_date', '=', $end_date)->Orwhere('end_date', '=', $end_date)->first();
+            $booking = Booking::where('room_id', $room->id)->whereBetween('start_date', [$start_date, $end_date])->OrwhereBetween('end_date', [$start_date, $end_date])->first();
 
 
             if (!empty($booking)) {

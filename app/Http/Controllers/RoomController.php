@@ -54,6 +54,7 @@
 
             $rooms = $this->roomRepository->checkAvailability($category_id, '', '', '');
 
+
             return response()->json(['status' => 'ok', 'data' => $rooms], 200);
 
         }
