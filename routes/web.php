@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+/** @var Router $router */
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,12 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+    use Laravel\Lumen\Routing\Router;
+
+    $router->get('/', function () use ($router) {
+        return $router->app->version();
+    });
+    $router->get('get-available-rooms', 'RoomController@getAvailableRooms');
+    $router->get('get-categories', 'RoomController@getCategories');
+    $router->post('check-availability', 'RoomController@checkAvailability');
+    $router->post('make-booking', 'RoomController@makeBooking');
