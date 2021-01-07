@@ -43,6 +43,8 @@ More at [JWT-Auth](https://jwt-auth.readthedocs.io/en/develop/ )
 
 + `Edit .env with your DB Credentials `
 
++ `php artisan db:seed`
+
 + `php artisan jwt:secret`
 
 
