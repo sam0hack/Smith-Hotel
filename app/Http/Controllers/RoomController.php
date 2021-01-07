@@ -116,7 +116,7 @@
             if (!$this->dateValidator($request->input('start_date'), $request->input('end_date'))) {
                 return response()->json(['status' => 'error', 'data' => 'End date should be greater than Start date']);
             }
-            $user_id = 0;
+            $user_id = 0; //@NOTE Sure about using auth because there wasn't anything about that in the requirement doc.
 
 
             $booking = $this->roomRepository->bookRoom(['user_id' => $user_id, 'room_number' => $request->input('room_number')

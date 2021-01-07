@@ -22,3 +22,6 @@
     $router->get('get-categories', 'RoomController@getCategories');
     $router->post('check-availability', 'RoomController@checkAvailability');
     $router->post('make-booking', 'RoomController@makeBooking');
+
+    $router->post('login', 'UserController@doLogin');
+    $router->post('signup', 'UserController@doSignup');
