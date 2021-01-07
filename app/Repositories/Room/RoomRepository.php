@@ -3,7 +3,6 @@
 
     namespace App\Repositories\Room;
 
-
     use App\Models\Booking;
     use App\Models\Category;
     use App\Models\Room;
@@ -27,7 +26,8 @@
 
             $data = [];
             foreach (Category::get() as $category) {
-                array_push($data, ['category' => $category->title, 'rooms' => $this->checkAvailability($category->id, '')]);
+                $rooms = $this->checkAvailability($category->id, '');
+                array_push($data, ['category' => $category->title, 'available_number_rooms' => count($rooms), 'rooms' => $rooms]);
             }
 
             return $data;
